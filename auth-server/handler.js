@@ -16,7 +16,7 @@ module.exports.getAccessToken = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*', 'http://127.0.0.1:8080/test-auth-server.html'
+      'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({
       access_token: info.data.access_token,
@@ -39,7 +39,7 @@ module.exports.getRefreshAccessToken = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*', 'http://127.0.0.1:8080/test-auth-server.html'
+      'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({
       access_token: info.data.access_token,

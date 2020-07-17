@@ -7,7 +7,13 @@
         <input id="code" type="text" placeholder="code" />
         <button id="getToken">Get Token</button>
         <p id="result"></p>
+
+        <input id="refresh_token" type="text" placeholder="" />
+        <button id="refreshToken">Refresh Token</button>
+        <p id="refresh_result"></p>
       </div>
+
+
 
       <script type="text/javascript">
         const getTokenElement = document.getElementById('getToken');
@@ -20,6 +26,22 @@
 
           fetch(lambdaURL)
             .then(function(response){
+              return response.json();
+            })
+            .then(function(json) {
+              resultElement.innerText = JSON.stringify(json);
+            });
+        }
+
+        const getRefreshElement = document.getElementById('refreshToken');
+        getRefreshElement.onclick = function() {
+          const codeElement = document.getElementById('refresh_token');
+          const resultElement = document.getElementById('refresh_result');
+          const codeValue = codeElement.value;
+          const lambdaURL = 'https://87m48swsbc.execute-api.eu-central-1.amazonaws.com/dev/api/refresh_token/' + codeValue;
+
+          fetch(lambdaURL)
+            .then(function(response) {
               return response.json();
             })
             .then(function(json) {
