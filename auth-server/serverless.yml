@@ -13,3 +13,10 @@ functions:
       - http:
           path: api/token/{code}
           method: get
+
+  getRefreshAccessToken:
+    handler: handler.getRefreshAccessToken
+    events:
+      - http:
+          path: api/refresh_token/{refresh_token}
+          method: get
