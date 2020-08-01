@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import NumberOfEvents from '../NumberOfEvents';
 import { mockEvents } from '../mock-events';
 
 describe('<App /> component', () => {
@@ -18,9 +19,13 @@ describe('<App /> component', () => {
   test('render CitySearch', () => {
     expect(AppWrapper.find(CitySearch)).toHaveLength(1);
   });
+
+  test('render NumberOfEvents', () => {
+    expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
+  })
 });
 
-describe('<App /> component', () => {
+describe('<App /> integration', () => {
 
   test('get list of events after user selects a city', async () => {
     const AppWrapper = mount(<App />);
@@ -44,6 +49,17 @@ describe('<App /> component', () => {
     const AppWrapper = mount(<App />);
     AppWrapper.setState({ events: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }] });
     expect(AppWrapper.find('.Event')).toHaveLength(4);
+    AppWrapper.unmount();
+  });
+
+  test('update number of events after user changes number', async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.instance().updateEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    NumberOfEventsWrapper.instance().handleInputChanged({ target: { value: 1 } });
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(null, null, 1);
     AppWrapper.unmount();
   });
 });
