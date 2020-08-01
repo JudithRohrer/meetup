@@ -15,14 +15,13 @@ class NumberOfEvents extends Component {
   render() {
     return (
       <div className="NumberOfEvents">
-        <p>Show</p>
-        <input
+          <input
           type="number"
           className="eventNumberInput"
           value={this.state.eventsShown}
           onChange={this.handleInputChanged}
         />
-        <p>Events</p>
+          <h5>Events shown</h5>
       </div>
     );
   }
