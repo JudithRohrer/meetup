@@ -31,7 +31,7 @@ class Event extends Component {
         </button>
         {showDetails && (
           <div className="eventDetails">
-            <p className="eventDescription">{event.description}</p>
+            <p className="eventDescription" dangerouslySetInnerHTML={{ __html: event.description }}></p>
           </div>
         )}
       </div>

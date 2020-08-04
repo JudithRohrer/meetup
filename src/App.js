@@ -6,6 +6,7 @@ import NumberOfEvents from './NumberOfEvents';
 import  { getEvents } from './api';
 
 class App extends Component {
+
   state = {
     events: [],
     page: null
@@ -14,6 +15,7 @@ class App extends Component {
   componentDidMount() {
     this.updateEvents();
   }
+
 
   updateEvents = (lat, lon, page) => {
     if (lat && lon) {
