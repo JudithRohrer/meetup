@@ -13,15 +13,14 @@ defineFeature(feature, test => {
     let AppWrapper;
     given('A list of events has been loaded', () => {
       AppWrapper = mount(<App />);
-      AppWrapper.update();
-      expect(AppWrapper.find('.Event')).toHaveLength(mockEvents.events.length);
     });
 
     when('User hasn’t yet specified number of events shown on dashboard', () => {
     });
 
     then('32 events around the users location will be shown by default', () => {
-      expect(AppWrapper.state('query')).toEqual(32);
+      const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+      expect(NumberOfEventsWrapper.state('eventsShown')).toEqual(32);
     });
   });
 

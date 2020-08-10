@@ -11,7 +11,6 @@ defineFeature(feature, test => {
     let AppWrapper;
     given('A list of events has been loaded', () => {
       AppWrapper = mount(<App />);
-      expect(AppWrapper.find('.Event')).toHaveLength(mockEvents.events.length);
     });
 
     when('User hasn’t yet click the “show details” button on a certain event', () => {
@@ -28,7 +27,6 @@ defineFeature(feature, test => {
       given('A list of events has been loaded', () => {
         AppWrapper = mount(<App />);
         AppWrapper.update();
-        expect(AppWrapper.find('.Event')).toHaveLength(mockEvents.events.length);
       });
 
       when('User clicks on ”show details” button of a certain event', () => {
@@ -46,12 +44,11 @@ defineFeature(feature, test => {
       let AppWrapper;
       given('User has expanded a certain event for more details', () => {
         AppWrapper = mount(<App />);
-        AppWrapper.find('.details-btn').at(0).simulate('click');
-        expect(AppWrapper.find('.eventDescription')).toHaveLength(1);
       });
 
       when('User clicks ”hide details” button of this event', () => {
         AppWrapper.update();
+        AppWrapper.find('.details-btn').at(0).simulate('click');
         AppWrapper.find('.details-btn').at(0).simulate('click');
       });
 
