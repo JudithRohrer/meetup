@@ -4,6 +4,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import  { getEvents } from './api';
+import { OnlineAlert } from './Alert';
 
 class App extends Component {
 
@@ -18,6 +19,17 @@ class App extends Component {
 
 
   updateEvents = (lat, lon, page) => {
+
+    if(!navigator.onLine) {
+      this.setState({
+        onlineText: 'Working offline...',
+      });
+    } else {
+      this.setState({
+        onlineText: '',
+      });
+    }
+
     if (lat && lon) {
       getEvents(lat, lon, this.state.page).then(events => this.setState({ events, lat, lon }));
   } else if (page) {
@@ -31,6 +43,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <OnlineAlert text={this.state.onlineText} />
         <CitySearch updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
         <NumberOfEvents updateEvents={this.updateEvents} />
